@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { AwilixContainer, LifetimeType } from 'awilix';
-import { LoggerOptions, MigrationInterface } from 'typeorm';
-import { MultiTenancyOptions } from 'modules/multi-tenancy/types';
+import { MigrationInterface } from 'typeorm';
 
 export type MedusaContainer = AwilixContainer & {
 	registerAdd: <T>(name: string, registration: T) => MedusaContainer;
@@ -201,28 +200,3 @@ export interface MedusaDynamicModule<T = unknown> {
  * Mix the return type of two objects.
  */
 export type MixinReturnType<T1, T2> = Constructor<T1 & T2>;
-export type DatabaseTlsOptions = {
-	ca: string | undefined;
-	rejectUnauthorized: boolean | undefined;
-};
-
-export type ConfigModule = {
-	projectConfig: {
-		database_host: string;
-		database_port: number;
-		database_ssl?: DatabaseTlsOptions;
-		database_username: string;
-		database_password: string | (() => string) | (() => Promise<string>);
-		database_type: string;
-		database_url: string;
-		database_database: string;
-		database_logging?: LoggerOptions;
-		database_extra: Record<string, string>;
-		cli_migration_dirs?: string[];
-		/**
-		 * @deprecated in favor of cli_migration_dirs
-		 */
-		cliMigrationsDirs?: string[];
-	};
-	multi_tenancy?: MultiTenancyOptions;
-};
