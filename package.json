@@ -1,6 +1,6 @@
 {
-  "name": "medusa-extender",
-  "version": "1.8.8",
+  "name": "@sgftech/medusa-extender",
+  "version": "1.9.0-alpha-5",
   "description": "Medusa on steroid, take your medusa project to the next level with some badass features :rocket:",
   "keywords": [
     "medusa",

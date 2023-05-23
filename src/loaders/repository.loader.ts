@@ -78,11 +78,15 @@ function overrideRepository(container: MedusaContainer, repositoryOptions: GetIn
 	const { metatype, repository, override } = repositoryOptions;
 
 	// @ts-ignore
-	const { target, manager, queryRunner, metadata, ...custom } = repository;
+	try {
+		const { target, manager, queryRunner, metadata, ...custom } = repository;
 
-	Object.assign(override, custom);
+		Object.assign(override, custom);
 
-	const formattedName = lowerCaseFirst(metatype.name);
-	container.cache.delete(formattedName);
-	container.register(formattedName, asValue(override));
+		const formattedName = lowerCaseFirst(metatype.name);
+		container.cache.delete(formattedName);
+		container.register(formattedName, asValue(override));
+	} catch (e) {
+		logger.warn('database currently uninitialized, metadata not available');
+	}
 }
